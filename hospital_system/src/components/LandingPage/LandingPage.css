@@ -1,0 +1,38 @@
+/* .text {
+  font-weight: bold;
+  font-size: 5rem;
+  width: 0%;
+  color: navy;
+  margin: auto;
+  padding: 2rem;
+  background-color: ;
+} */
+
+.card {
+  height: 15rem;
+  width: 25rem;
+  border-radius: solid;
+  outline: 2rem;
+}
+
+.card-body {
+  font-weight: bold;
+  background-color: #00b4d8;
+  border-radius: 15px;
+}
+
+.card-title {
+  font-weight: bold;
+  font-style: italic;
+}
+.card-text {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.line {
+  border: 2px solid navy;
+  border-radius: 5px;
+}
+.hr {
+  background-color: #00b4d8;
+}
