@@ -1,10 +1,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
-//import 'bootstrap/dist/js/bootstrap.js'
+import 'bootstrap/dist/js/bootstrap.js'
 
-import image1 from '../Carousel/CarouselImages/image1.jpeg';
+import image1 from '../Carousel/CarouselImages/image5.png';
 import image2 from '../Carousel/CarouselImages/image4.jpeg';
-import image3 from '../Carousel/CarouselImages/image5.png';
+import image3 from '../Carousel/CarouselImages/image1.jpeg';
 
 const Carousel = () => {
     return (
@@ -19,22 +19,16 @@ const Carousel = () => {
     <div class="carousel-item active">
       <img src={image1} class="d-block w-100" alt="First Slide" width='100%' height='700px'/>
       <div class="carousel-caption d-none d-md-block">
-        <h5>First slide label</h5>
-        <p>Some representative placeholder content for the first slide.</p>
       </div>
     </div>
     <div class="carousel-item">
       <img src={image2} class="d-block w-100" alt="Second Slide"  width='100%' height='700px'/>
       <div class="carousel-caption d-none d-md-block">
-        <h5>Second slide label</h5>
-        <p>Some representative placeholder content for the second slide.</p>
       </div>
     </div>
     <div class="carousel-item">
       <img src={image3} class="d-block w-100" alt="Third Slide"  width='100%' height='700px'/>
       <div class="carousel-caption d-none d-md-block">
-        <h5>Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
       </div>
     </div>
   </div>

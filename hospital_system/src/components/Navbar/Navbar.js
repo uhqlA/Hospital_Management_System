@@ -1,34 +1,38 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import './Navstyles.css'
 import logo from '../Navbar/Logo/logo.jpg';
-// import {Navbar, Nav, Container} from 'react-bootstrap'
-import {
-  Nav,
-  NavMenu,
-  NavLink,
-  NavBtn,
-  NavBtnLink,
-} from './NavElements.js'
-
-const Navbar = () => {
-   return (
-     <>
-     <Nav>
-       <NavMenu>
-         <NavLink to='/'> <img
+function Navbar() {
+  return (
+    <div>   
+      <nav className="navbar">
+    
+      <div className="logo"><img
       src={logo} alt='logo'
       width="70"
       height="70"
-    /></NavLink>
-         <NavBtn>
-         <NavBtnLink to='/Admin' activeStyle>ADMIN</NavBtnLink>
-         <NavBtnLink to='/Doctors' activeStyle>DOCTOR</NavBtnLink>
-         <NavBtnLink to='/Employees' activeStyle>EMPLOYEE</NavBtnLink>
-        </NavBtn>
-       </NavMenu>
-     </Nav> 
-     </>
-   )
+    /></div>
+      
+      <ul className="nav-links">
+        
+ 
+        <div className="menu">
+          <a href="/">Doctors Portal</a>
+          <a href="/">Staff Portal</a>
+          <a href="/">Admin Portal</a>
+          <div className="services">
+            <a href="/">Services</a>
+
+            <ul className="dropdown">
+              <li><a href="/">In Patients</a></li>
+              <li><a href="/">Out Patients</a></li>
+            </ul>
+          </div>
+          
+          <a href="/">Contacts</a>
+        </div>
+      </ul>
+    </nav></div>
+  )
 }
 
 export default Navbar
