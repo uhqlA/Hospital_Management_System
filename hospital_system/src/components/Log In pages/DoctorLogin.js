@@ -6,6 +6,7 @@ const DoctorLogin = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [btnDisabled, setbtnDisabled] = useState();
+    const [error, setError] = useState("");
 
 
     const handleUsernameChange =(e) =>{
@@ -16,19 +17,19 @@ const DoctorLogin = () => {
         setPassword(e.target.value);
     }
 
+    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})");
+
     const handleSubmit = (e)=>{
+        e.preventDefault();
         if(!username || !password){
             setbtnDisabled(true);
-            alert('Make sure all the fields are filled')
+            setError('Make sure all the fields are filled')
         } else if (username && username.trim().length<4){
             setbtnDisabled(true);
-            alert('Enter a Valid username');
-        }else if (password && password.trim().length<8){
+            setError('Enter a Valid username');
+        }else if (!strongRegex.test(password)){
             setbtnDisabled(true);
-            alert('Check Password');
-        } else {
-            e.preventDefault();
-            alert ('Submitted successfully');
+            setError('Enter a valid password');
         }
 
     }
@@ -49,7 +50,7 @@ const DoctorLogin = () => {
                                         <i className="fas fa-user"></i>
                                     </div>
                                     <div className="div">
-                                        <input type="text" className="input" placeholder='Enter Username' onChange={handleUsernameChange} value={username} />
+                                        <input required type="text" className="input" placeholder='Enter Username' onChange={handleUsernameChange} value={username} />
                                     </div>
                                 </div>
                                 <div className="input-div pass">
@@ -57,8 +58,9 @@ const DoctorLogin = () => {
                                         <i className="fas fa-lock"></i>
                                     </div>
                                     <div className="div">
-                                        <input type="password" className="input" placeholder='Enter Password' onChange={handlePasswordChange} value={password}/>
+                                        <input required type="password" className="input" placeholder='Enter Password' onChange={handlePasswordChange} value={password}/>
                                     </div>
+                                    {error? <p className='passerr'>{error}</p> :  null} 
                                 </div>
                                 <p>Forgot password?</p>
                                 <input type="submit" className="btn" value="Login" disabled={btnDisabled} />

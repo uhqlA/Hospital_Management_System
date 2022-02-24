@@ -181,6 +181,12 @@ p:hover{
 	background-position: right;
 }
 
+.passerr {
+	color: red;
+	text-align: center;
+	
+}
+
 
 @media screen and (max-width: 1050px){
 	.container{
