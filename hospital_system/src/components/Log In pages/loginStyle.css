@@ -186,7 +186,9 @@ p:hover{
 	text-align: center;
 	
 }
-
+.redirect{
+	text-decoration: none;
+}
 
 @media screen and (max-width: 1050px){
 	.container{

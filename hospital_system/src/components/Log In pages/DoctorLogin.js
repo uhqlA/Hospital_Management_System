@@ -1,37 +1,49 @@
 import React, {useState} from 'react'
 import './loginStyle.css'
+import {Link} from 'react-router-dom'
+
 
 const DoctorLogin = () => {
 
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [btnDisabled, setbtnDisabled] = useState();
-    const [error, setError] = useState("");
+    const [btnDisabled, setbtnDisabled] = useState(false);
+    const [passError, setPassError] = useState("");
+    const [emailError, setEmailError] = useState("");
 
+    const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,16})");
+    const emailRegex = new RegExp("^[a-zA-Z0-9.!#$%&’+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$");
 
     const handleUsernameChange =(e) =>{
-        setUsername(e.target.value)
+        const value = e.target.value;
+        let error;
+        setEmail(value)
+        if( value && !emailRegex.test(value)) {
+            setbtnDisabled(true)
+            setEmailError("Invalid Email");
+        }else {
+            setEmailError('')
+            setbtnDisabled(false)
+        }
+        console.log(emailError);
     }
 
     const handlePasswordChange = (e)=>{
-        setPassword(e.target.value);
+        const value = e.target.value
+            setPassword(value)
+        if( value && !strongRegex.test(value)) {        
+            setbtnDisabled(true)
+            setPassError("Check your password");
+        }else {
+            setPassError('')
+            setbtnDisabled(false)
+        }
     }
 
-    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})");
 
     const handleSubmit = (e)=>{
         e.preventDefault();
-        if(!username || !password){
-            setbtnDisabled(true);
-            setError('Make sure all the fields are filled')
-        } else if (username && username.trim().length<4){
-            setbtnDisabled(true);
-            setError('Enter a Valid username');
-        }else if (!strongRegex.test(password)){
-            setbtnDisabled(true);
-            setError('Enter a valid password');
-        }
-
+     
     }
 
     return (
@@ -50,8 +62,9 @@ const DoctorLogin = () => {
                                         <i className="fas fa-user"></i>
                                     </div>
                                     <div className="div">
-                                        <input required type="text" className="input" placeholder='Enter Username' onChange={handleUsernameChange} value={username} />
+                                        <input required type="email" className="input" placeholder='Enter Email' onChange={handleUsernameChange} value={email} />
                                     </div>
+                                    {emailError && <small className='err'>{emailError}</small>} 
                                 </div>
                                 <div className="input-div pass">
                                     <div className="i">
@@ -60,10 +73,15 @@ const DoctorLogin = () => {
                                     <div className="div">
                                         <input required type="password" className="input" placeholder='Enter Password' onChange={handlePasswordChange} value={password}/>
                                     </div>
-                                    {error? <p className='passerr'>{error}</p> :  null} 
+                                    {passError &&  <small className='err'>{passError}</small>} 
                                 </div>
                                 <p>Forgot password?</p>
+                                
+                                
                                 <input type="submit" className="btn" value="Login" disabled={btnDisabled} />
+                                
+                            
+                                                       
                         </form> 
                     </div>
                 </div>
