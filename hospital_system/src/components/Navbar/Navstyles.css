@@ -1,0 +1,55 @@
+.navbar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 20px;
+          background-color: #00B4D8;
+          color: #fff;
+         }
+         .nav-links a {
+             text-decoration: none;
+          color: #fff;
+         }
+         .nav-links a:hover {
+          background-color: brown;
+        color: blue;
+         }
+         /* LOGO */
+         .logo {
+          font-size: 32px;
+          font-family: Georgia, 'Times New Roman', Times, serif;
+         }
+         /* NAVBAR MENU */
+         .menu {
+          display: flex;
+          gap: 1em;
+          font-size: 18px;
+         }
+      
+      
+         /* DROPDOWN MENU */
+         .services {
+          position: relative; 
+         }
+         .dropdown {
+          background-color: #00B4D8;
+          padding: 1em 0;
+          position: absolute; /*WITH RESPECT TO PARENT*/
+          display: none;
+          border-radius: 8px;
+          top: 35px;
+         }
+         .dropdown li + li {
+          margin-top: 10px;
+         }
+         .dropdown li {
+          padding: 0.5em 1em;
+          width: 8em;
+          text-align: center;
+         }
+         .dropdown li:hover {
+          background-color: #4c9e9e;
+         }
+         .services:hover .dropdown {
+          display: block;
+         }
