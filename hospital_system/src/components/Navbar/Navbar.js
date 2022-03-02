@@ -14,7 +14,7 @@ function Navbar() {
         <div className="menu">
           <a href="/doctorslogin">Doctors Portal</a>
           <a href="/stafflogin">Staff Portal</a>
-          <a href="/adminlogin">Admin Portal</a>
+          <a href="/adminlogin`">Admin Portal</a>
           <div className="services">
             <a href="/">Products and Services</a>
 
@@ -26,7 +26,7 @@ function Navbar() {
               <li><a href="/">Family Medical scheme</a></li>
               <li><a href="/">Corporate Medical scheme</a></li>
             </ul>
-          </div>
+         </div>
           
           <a href="/">Contacts</a>
         </div>

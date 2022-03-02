@@ -6,12 +6,18 @@ import DoctorLogin from './components/Log In pages/DoctorLogin';
 import StaffLogin from './components/Log In pages/StaffLogin';
 import StraffLogin from './components/Log In pages/StaffLogin';
 import Navbar from './components/Navbar/Navbar';
+import LandingPage from './components/LandingPage/LandingPage';
+import Footer from './components/Footer/Footer';
+import ViewDoctors from './components/AdminRoutes/DoctorRoutes/ViewDoctors';
+
 
 function App() {
   return (
   <div>
-    <Navbar />
+    <>
+    {/* <Navbar />
     <BrowserRouter>
+    
       <Routes>
         
         <Route path='/doctorslogin' element={<DoctorLogin />} />
@@ -20,6 +26,13 @@ function App() {
         
       </Routes>
     </BrowserRouter>
+   <LandingPage />
+    <Footer /> */}
+    <Dashboard />
+
+    </>
+    
+  
   </div>
   );
 }

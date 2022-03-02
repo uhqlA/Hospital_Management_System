@@ -1,0 +1,28 @@
+.doctorName {
+display: flex;
+align-items: center;
+
+}
+
+.doctorsTable {
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.editBtnDr{
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+.dltBtn{
+    background:  none;
+    color: red;
+    border: none;
+    padding-left: 10px;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}

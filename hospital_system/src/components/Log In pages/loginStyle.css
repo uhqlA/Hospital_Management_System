@@ -181,9 +181,10 @@ p:hover{
 	background-position: right;
 }
 
-.passerr {
+.err {
 	color: red;
-	text-align: center;
+	text-align: end;
+	white-space: nowrap;
 	
 }
 .redirect{

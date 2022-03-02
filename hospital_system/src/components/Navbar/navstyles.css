@@ -1,3 +1,4 @@
+
 .navbar {
     display: flex;
     align-items: center;
@@ -7,7 +8,7 @@
     color: #fff;
    }
    .nav-links a {
-       text-decoration: none;
+    text-decoration: none;
     color: #fff;
    }
    /* LOGO */
@@ -30,7 +31,7 @@
    .dropdown {
     background-color: #00B4D8;
     padding: 1em 0;
-    position: absolute; /*WITH RESPECT TO PARENT*/
+    position: absolute; /*WITH RESPECT TO PARENT */
     display: none;
     border-radius: 8px;
     top: 35px;
@@ -40,6 +41,7 @@
    }
    .dropdown li {
     padding: 0.5em 1em;
+    position: relative;
     width: 12em;
     font-size: 15px;
     text-align: center;

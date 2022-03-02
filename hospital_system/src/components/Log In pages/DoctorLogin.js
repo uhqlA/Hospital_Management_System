@@ -64,7 +64,9 @@ const DoctorLogin = () => {
                                     <div className="div">
                                         <input required type="email" className="input" placeholder='Enter Email' onChange={handleUsernameChange} value={email} />
                                     </div>
-                                    {emailError && <small className='err'>{emailError}</small>} 
+
+                                {emailError && <small className='err'>{emailError}</small>} 
+
                                 </div>
                                 <div className="input-div pass">
                                     <div className="i">
