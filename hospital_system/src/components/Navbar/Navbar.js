@@ -12,9 +12,9 @@ function Navbar() {
         
  
         <div className="menu">
-          <a href="/doctorslogin">Doctors Portal</a>
-          <a href="/stafflogin">Staff Portal</a>
-          <a href="/adminlogin`">Admin Portal</a>
+          <Link to="/doctorslogin">Doctors Portal</Link>
+          <Link to="/stafflogin">Staff Portal</Link>
+          <Link to="/adminlogin">Admin Portal</Link>
           <div className="services">
             <a href="/">Products and Services</a>
 
