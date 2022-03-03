@@ -1,3 +1,10 @@
+.viewDoctors{
+    width: 100%;
+    height: 98vh;
+    display: flex;
+
+}
+
 .doctorName {
 display: flex;
 align-items: center;
@@ -6,11 +13,14 @@ align-items: center;
 
 .doctorsTable {
     height: 100vh;
-    position: absolute;
-    display: flex;
-    flex-wrap: wrap;
+    width: 82%;
     
 }
+
+.css-18lolh3-MuiDataGrid-root {
+    height: 98vh !important;
+    margin-top:5rem;
+  }
 
 .editBtnDr{
     border-radius: 5px;

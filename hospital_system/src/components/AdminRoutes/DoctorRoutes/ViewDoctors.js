@@ -42,16 +42,16 @@ export default function ViewDoctors() {
 
     return (
 
-    <>
+    <div className="viewDoctors">
     <Sidebar />
-            <div className="doctorsTable">
+            <div className="home-section">
             <DataGrid
                 rows={data}
                 disableSelectionOnClick
                 columns={columns}
             />
         </div>
-    </>
+    </div>
 
 
     )

@@ -47,6 +47,7 @@ function StaffLogin() {
 
     return (
         <div>
+            <Navbar />
             <img className="wave" src="../assets/LoginImages/bg.png" alt='wave'/>
                 <div className="container">
                     <div className="img">

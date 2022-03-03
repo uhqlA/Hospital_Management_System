@@ -1,14 +1,12 @@
 import React from 'react'
-import ViewDoctors from '../AdminRoutes/DoctorRoutes/ViewDoctors'
-import Content from './AdminDash/Content'
 import Sidebar from './AdminDash/Sidebar'
-
+import {BrowserRouter,Routes, Route, Outlet } from 'react-router-dom'
 
 function Dashboard() {
   return (
     <div className='dashboard-container'>
-      <Sidebar />
-      <Content />
+      <Sidebar/>
+      <Outlet/>
     </div>
   )
 }

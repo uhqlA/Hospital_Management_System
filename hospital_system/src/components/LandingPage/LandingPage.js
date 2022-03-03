@@ -1,9 +1,12 @@
 import React from 'react'
+import Navbar from '../Navbar/Navbar'
 import './LandingPage.css'
 
 function LandingPage() {
     return (
 
+        <>
+        <Navbar/>
         <div classNameName="container">
             <section className="home" id="home">
 
@@ -22,6 +25,7 @@ function LandingPage() {
         </div >
 
 
+        </>
 
 
     )

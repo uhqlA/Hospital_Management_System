@@ -1,8 +1,11 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
-
+import {useNavigate} from  "react-router-dom"
+import Navbar from '../Navbar/Navbar';
 function AdminLogin() {
   
+    const navigate= useNavigate();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [btnDisabled, setbtnDisabled] = useState(false);
@@ -41,11 +44,15 @@ function AdminLogin() {
 
     const handleSubmit = (e)=>{
         e.preventDefault();
-     
+
+     // after handling login functionality
+
+     navigate("/admin-dashboard")
     }
 
     return (
         <div>
+            <Navbar />
             <img className="wave" src="../assets/LoginImages/bg.png" alt='wave'/>
                 <div className="container">
                     <div className="img">

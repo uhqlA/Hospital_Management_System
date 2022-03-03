@@ -1,6 +1,6 @@
 import React from 'react'
 import './dashboard.css'
-
+import  {Link} from 'react-router-dom'
 function Sidebar() {
    
         const navToggle = () => {
@@ -25,16 +25,16 @@ function Sidebar() {
                 </div>
                 <ul className="nav-links">
                     <li>
-                        <a href="/" className="active">
+                        <Link to="/admin-dashboard" className="active">
                             <i className="bx bx-grid-alt" />
                             <span className="links_name">Dashboard</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="/">
+                        <Link to="/admin-dashboard/doctors">
                             <i className="bx bx-box" />
                             <span className="links_name">Doctors</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
                         <a href="/">
