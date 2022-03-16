@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import {useNavigate} from  "react-router-dom"
 import Navbar from '../Navbar/Navbar';
+import axios from 'axios'
+
 function AdminLogin() {
   
     const navigate= useNavigate();
@@ -44,6 +46,15 @@ function AdminLogin() {
 
     const handleSubmit = (e)=>{
         e.preventDefault();
+
+        axios.post('http://localhost:8000/loginUsers', {
+            id:"210101", 
+            password:"123qwer45"
+        }).then(
+            (res) =>{
+                console.log(res.Headers['Set-cookie'])
+            }
+        )
 
      // after handling login functionality
 

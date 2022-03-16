@@ -56,8 +56,8 @@
   text-decoration: none;
   transition: all 0.4s ease;
 }
-.sidebar .nav-links li a.active{
-  background: #6ae0f0;
+.sidebar .nav-links li a:active{
+  background: #f6faf9;
 }
 .sidebar .nav-links li a:hover{
   background: #6ae0f0;

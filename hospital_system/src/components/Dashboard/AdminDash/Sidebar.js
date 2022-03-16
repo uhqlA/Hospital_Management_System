@@ -25,7 +25,7 @@ function Sidebar() {
                 </div>
                 <ul className="nav-links">
                     <li>
-                        <Link to="/admin-dashboard" className="active">
+                        <Link to="/admin-dashboard" className=''>
                             <i className="bx bx-grid-alt" />
                             <span className="links_name">Dashboard</span>
                         </Link>
@@ -37,16 +37,16 @@ function Sidebar() {
                         </Link>
                     </li>
                     <li>
-                        <a href="/">
+                        <Link to="/admin-dashboard/employees">
                             <i className="bx bx-list-ul" />
-                            <span className="links_name">Nurses</span>
-                        </a>
+                            <span className="links_name">Staff</span>
+                        </Link>
                     </li>
                     <li>
-                        <a href="/">
+                        <Link to="/admin-dashboard/patients">
                             <i className="bx bx-pie-chart-alt-2" />
-                            <span className="links_name">Operation Rooms</span>
-                        </a>
+                            <span className="links_name">Patients</span>
+                        </Link>
                     </li>
                     <li>
                         <a href="/">

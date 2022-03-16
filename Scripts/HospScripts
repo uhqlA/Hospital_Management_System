@@ -1,0 +1,250 @@
+CREATE SCHEMA IF NOT EXISTS `Hosp_System` DEFAULT CHARACTER SET utf8 ;
+USE `Hosp_System` ;
+
+
+
+
+-- -----------------------------------------------------
+-- Table `Hosp_System`.`Roles`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Hosp_System`.`Roles` (
+  `idRoles` INT NOT NULL,
+  `roleName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idRoles`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Hosp_System`.`Users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Hosp_System`.`Users` (
+  `idUsers` INT NOT NULL,
+  `userName` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `idRoles` INT NOT NULL,
+  PRIMARY KEY (`idUsers`, `idRoles`),
+  INDEX `fk_Users_Roles_idx` (`idRoles` ASC) VISIBLE,
+  CONSTRAINT `fk_Users_Roles`
+    FOREIGN KEY (`idRoles`)
+    REFERENCES `mydb`.`Roles` (`idRoles`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Hosp_System`.`Doctors`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Hosp_System`.`Doctors` (
+  `idDoctors` INT NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `department` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `phoneNo` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idDoctors`),
+  INDEX `fk_Doctors_Users1_idx` (`idDoctors` ASC) VISIBLE,
+  CONSTRAINT `fk_Doctors_Users1`
+    FOREIGN KEY (`idDoctors`)
+    REFERENCES `mydb`.`Users` (`idUsers`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Hosp_System`.`Employees`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Hosp_System`.`Employees` (
+  `idEmployees` INT NOT NULL,
+  `name` INT NOT NULL,
+  `email` INT NOT NULL,
+  `phoneNo` INT NOT NULL,
+  PRIMARY KEY (`idEmployees`),
+  INDEX `fk_Employees_Users1_idx` (`idEmployees` ASC) VISIBLE,
+  CONSTRAINT `fk_Employees_Users1`
+    FOREIGN KEY (`idEmployees`)
+    REFERENCES `mydb`.`Users` (`idUsers`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Hosp_System`.`Patients`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Hosp_System`.`Patients` (
+  `idPatients` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `D.O.B` DATE NOT NULL,
+  `address` VARCHAR(45) NULL,
+  `gender` TINYINT NOT NULL,
+  `idDoctors` INT NULL,
+  `idEmployees` INT NOT NULL,
+  PRIMARY KEY (`idPatients`),
+  UNIQUE INDEX `idDoctors_UNIQUE` (`idDoctors` ASC) VISIBLE,
+  INDEX `fk_Patients_Employees1_idx` (`idEmployees` ASC) VISIBLE,
+  CONSTRAINT `fk_Patients_Employees1`
+    FOREIGN KEY (`idEmployees`)
+    REFERENCES `mydb`.`Employees` (`idEmployees`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Hosp_System`.`Out-patient`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Hosp_System`.`Out-patient` (
+  `idOut-patient` INT NOT NULL,
+  `idPatients` INT NOT NULL,
+  `date` DATE NOT NULL,
+  PRIMARY KEY (`idOut-patient`),
+  UNIQUE INDEX `idPatients_UNIQUE` (`idPatients` ASC) VISIBLE,
+  CONSTRAINT `fk_Out-patient_Patients1`
+    FOREIGN KEY (`idPatients`)
+    REFERENCES `mydb`.`Patients` (`idPatients`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Hosp_System`.`Room`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Hosp_System`.`Room` (
+  `idRoom` INT NOT NULL DEFAULT 5000,
+  `type` VARCHAR(45) NOT NULL,
+  `status` TINYINT NOT NULL,
+  PRIMARY KEY (`idRoom`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Hosp_System`.`In-patient`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Hosp_System`.`In-patient` (
+  `idIn-patient` INT NOT NULL,
+  `idPatients` INT NOT NULL,
+  `idRoom` INT NOT NULL,
+  `date_of_adm` DATE NOT NULL,
+  `date_of_dis` DATE NOT NULL,
+  PRIMARY KEY (`idIn-patient`),
+  UNIQUE INDEX `idPatients_UNIQUE` (`idPatients` ASC) VISIBLE,
+  UNIQUE INDEX `idRoom_UNIQUE` (`idRoom` ASC) VISIBLE,
+  CONSTRAINT `fk_In-patient_Patients1`
+    FOREIGN KEY (`idPatients`)
+    REFERENCES `mydb`.`Patients` (`idPatients`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_In-patient_Room1`
+    FOREIGN KEY (`idRoom`)
+    REFERENCES `mydb`.`Room` (`idRoom`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Hosp_System`.`Billing`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Hosp_System`.`Billing` (
+  `idBilling` INT NOT NULL AUTO_INCREMENT,
+  `idPatients` INT NOT NULL,
+  `doctorCharge` INT NULL,
+  `roomCharge` INT NULL,
+  `totalBill` INT NOT NULL,
+  `idEmployees` INT NOT NULL,
+  PRIMARY KEY (`idBilling`),
+  UNIQUE INDEX `idPatients_UNIQUE` (`idPatients` ASC) VISIBLE,
+  INDEX `fk_Billing_Room1_idx` (`roomCharge` ASC) VISIBLE,
+  INDEX `fk_Billing_Employees1_idx` (`idEmployees` ASC) VISIBLE,
+  CONSTRAINT `fk_Billing_Patients1`
+    FOREIGN KEY (`idPatients`)
+    REFERENCES `mydb`.`Patients` (`idPatients`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Billing_Room1`
+    FOREIGN KEY (`roomCharge`)
+    REFERENCES `mydb`.`Room` (`idRoom`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Billing_Employees1`
+    FOREIGN KEY (`idEmployees`)
+    REFERENCES `mydb`.`Employees` (`idEmployees`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Hosp_System`.`Medical_records`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Hosp_System`.`Medical_records` (
+  `idMedicalRecords` INT NOT NULL,
+  `idDoctors` INT NOT NULL,
+  `diagnosisSummary` VARCHAR(200) NOT NULL,
+  `idPatients` INT NOT NULL,
+  UNIQUE INDEX `idDoctors_UNIQUE` (`idDoctors` ASC) VISIBLE,
+  PRIMARY KEY (`idPatients`, `idMedicalRecords`),
+  CONSTRAINT `fk_Medical_records_Doctors1`
+    FOREIGN KEY (`idDoctors`)
+    REFERENCES `mydb`.`Doctors` (`idDoctors`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Medical_records_Patients1`
+    FOREIGN KEY (`idPatients`)
+    REFERENCES `mydb`.`Patients` (`idPatients`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Hosp_System`.`Doctors_has_Patients`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Hosp_System`.`Doctors_has_Patients` (
+  `idDoctors` INT NOT NULL,
+  `idPatients` INT NOT NULL,
+  PRIMARY KEY (`idDoctors`, `idPatients`),
+  INDEX `fk_Doctors_has_Patients_Patients1_idx` (`idPatients` ASC) VISIBLE,
+  INDEX `fk_Doctors_has_Patients_Doctors1_idx` (`idDoctors` ASC) VISIBLE,
+  CONSTRAINT `fk_Doctors_has_Patients_Doctors1`
+    FOREIGN KEY (`idDoctors`)
+    REFERENCES `mydb`.`Doctors` (`idDoctors`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Doctors_has_Patients_Patients1`
+    FOREIGN KEY (`idPatients`)
+    REFERENCES `mydb`.`Patients` (`idPatients`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+--Define Roles
+INSERT INTO `Hosp_System`.`Roles` (`idRoles`, `roleName`) VALUES ('10101', 'Admin');
+INSERT INTO `Hosp_System`.`Roles` (`idRoles`, `roleName`) VALUES ('20202', 'Doctor');
+INSERT INTO `Hosp_System`.`Roles` (`idRoles`, `roleName`) VALUES ('30303', 'Employee');
+
+
+--Populate the users table
+INSERT INTO `Hosp_System`.`Users` (`idUsers`, `userName`, `password`, `idRoles`) VALUES ('210101', 'Dr Cane', '1234', '20202');
+INSERT INTO `Hosp_System`.`Users` (`idUsers`, `userName`, `password`, `idRoles`) VALUES ('210102', 'Dr Murk', '1234', '20202');
+INSERT INTO `Hosp_System`.`Users` (`idUsers`, `userName`, `password`, `idRoles`) VALUES ('110101', 'Admin', 'admin', '10101');
+INSERT INTO `Hosp_System`.`Users` (`idUsers`, `userName`, `password`, `idRoles`) VALUES ('310101', 'Dave', '1234', '30303');
+INSERT INTO `Hosp_System`.`Users` (`idUsers`, `userName`, `password`, `idRoles`) VALUES ('210103', 'Dr John', '4325', '20202');
+INSERT INTO `Hosp_System`.`Users` (`idUsers`, `userName`, `password`, `idRoles`) VALUES ('310102', 'Steve', 'qwerty', '30303');
+INSERT INTO `Hosp_System`.`Users` (`idUsers`, `userName`, `password`, `idRoles`) VALUES ('310103', 'Vess', 'gtyyn!!@#', '30303');
+INSERT INTO `Hosp_System`.`Users` (`idUsers`, `userName`, `password`, `idRoles`) VALUES ('210104', 'Dr Kamau', '12a3a', '20202');
+INSERT INTO `Hosp_System`.`Users` (`idUsers`, `userName`, `password`, `idRoles`) VALUES ('310104', 'Sam', 'ggs123', '30303');
+INSERT INTO `Hosp_System`.`Users` (`idUsers`, `userName`, `password`, `idRoles`) VALUES ('210105', 'Dr Grace', '1234', '20202');
+
+--Query to get Users and their roles
+SELECT u.userName, r.roleName
+FROM Roles r
+JOIN Users u
+ON r.idRoles = u.idRoles;

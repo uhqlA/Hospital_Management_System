@@ -1,0 +1,8 @@
+#ignore the password files
+password.txt
+
+logs/
+
+#ignore the git and cache folders
+.git
+.cache

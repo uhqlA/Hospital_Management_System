@@ -1,11 +1,11 @@
-.viewDoctors{
+.viewUser{
     width: 100%;
     height: 98vh;
     display: flex;
 
 }
 
-.doctorName {
+.userName {
 display: flex;
 align-items: center;
 
