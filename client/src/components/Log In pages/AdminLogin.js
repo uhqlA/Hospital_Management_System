@@ -18,17 +18,22 @@ function AdminLogin() {
     const emailRegex = new RegExp("^[a-zA-Z0-9.!#$%&’+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$");
 
     const handleUsernameChange =(e) =>{
-        const value = e.target.value;
+        const email= e.target.value;
         let error;
-        setEmail(value)
-        if( value && !emailRegex.test(value)) {
-            setbtnDisabled(true)
-            setEmailError("Invalid Email");
-        }else {
-            setEmailError('')
-            setbtnDisabled(false)
+        try {
+            setEmail(email)
+            if( email && !emailRegex.test(email)) {
+                setbtnDisabled(true)
+                setEmailError("Invalid Email");
+            }else {
+                setEmailError('')
+                setbtnDisabled(false)
+                console.log(email)
+            }
+           // console.log(emailError);
+        } catch (error) {
+            console.log('Error Occureed in the email try-catch', error)
         }
-        console.log(emailError);
     }
 
     const handlePasswordChange = (e)=>{
@@ -40,25 +45,24 @@ function AdminLogin() {
         }else {
             setPassError('')
             setbtnDisabled(false)
+            console.log(value)
         }
     }
 
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = async(e)=>{
         e.preventDefault();
 
-        axios.post('http://localhost:8000/loginUsers', {
-            id:"210101", 
-            password:"123qwer45"
-        }).then(
-            (res) =>{
-                console.log(res.Headers['Set-cookie'])
-            }
-        )
-
-     // after handling login functionality
-
-     navigate("/admin-dashboard")
+        const {data} = await axios.post('/loginUsers', {
+            email: email,
+            password: password
+        })
+           
+             navigate("/admin-dashboard")
+            //alert(data.message)
+            
+        
+        console.log(data.token)
     }
 
     return (

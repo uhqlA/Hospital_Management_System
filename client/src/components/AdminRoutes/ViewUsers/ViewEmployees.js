@@ -11,7 +11,7 @@ export default function ViewEmployees() {
 
     const loadEmployees =  () => {
         try {
-            axios.get("http://localhost:8000/getEmployees").then(
+            axios.get("/getEmployees").then(
                 (res) => {
                     setValues(res.data)
                 }

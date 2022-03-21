@@ -13,7 +13,7 @@ export default function ViewDoctors() {
 
     const loadDoctors =  () => {
         try {
-            axios.get("http://localhost:8000/getDoctors").then(
+            axios.get("/getDoctors").then(
                 (res) => {
                     setValues(res.data)
                   

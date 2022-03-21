@@ -9,6 +9,9 @@ const User = db.define('Users', {
     userName:{
         type: DataTypes.STRING
     },
+    email:{
+        type: DataTypes.STRING
+    },
     password:{
         type: DataTypes.STRING
     },

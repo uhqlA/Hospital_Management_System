@@ -1,7 +1,11 @@
 import React from 'react'
 import './dashboard.css'
 import  {Link} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 function Sidebar() {
+
+    const navigate = useNavigate();
    
         const navToggle = () => {
             let sidebar = document.querySelector(".sidebar");
@@ -13,6 +17,20 @@ function Sidebar() {
             }else
               sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
             }
+        }
+
+        const handleLogout = (e)=>{
+            e.preventDefault();
+    
+            axios.post('/logout').then(
+                () =>{
+                    console.log('Logout successfull')
+                }
+            )
+    
+         // after handling Logout functionality
+    
+         navigate("/")
         }
 
     return (
@@ -79,7 +97,7 @@ function Sidebar() {
                         </a>
                     </li>
                     <li className="log_out">
-                        <a href="/">
+                        <a onClick={handleLogout}>
                             <i className="bx bx-log-out" />
                             <span className="links_name">Log out</span>
                         </a>

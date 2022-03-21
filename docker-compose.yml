@@ -1,28 +1,14 @@
 version: '3.7'
 
 x-common-variables: &common-variables
-  MYSQL_DATABASE: books
-  MYSQL_USER: MYSQL_USER
-  MYSQL_PASSWORD: MYSQL_PASSWORD
+  MYSQL_DATABASE: Hosp_System
+  MYSQL_USER: thuo
+  MYSQL_PASSWORD: Bingiras18
 
 services:
-  mysql_db:
-    image: mysql
-    restart: always
-    cap_add:
-      - SYS_NICE
-    volumes:
-      - "./setup.sql:/docker-entrypoint-initdb.d/setup.sql"
-    ports:
-      - "9906:3306"
-    environment:
-      <<: *common-variables
-      MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
-      MYSQL_HOST: localhost
-
   nginx:
     depends_on:
-      - api
+      - server
       - client
     restart: always
     build:
@@ -31,12 +17,10 @@ services:
     ports:
       - "3050:80"
 
-  api:
+  server:
     build:
       dockerfile: Dockerfile
       context: "./server"
-    depends_on:
-      - mysql_db
     volumes:
       - /app/node_modules
       - ./server:/app
@@ -55,12 +39,3 @@ services:
       - /app/node_modules
       - ./client:/app
 
-  adminer:
-      image: adminer:latest
-      restart: unless-stopped
-      ports:
-        - 8000:8080
-      depends_on:
-        - mysql_db
-      environment:
-        ADMINER_DEFAULT_SERVER: mysql_db
