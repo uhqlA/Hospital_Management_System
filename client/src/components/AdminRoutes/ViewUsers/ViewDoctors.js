@@ -80,7 +80,6 @@ export default function ViewDoctors() {
             }
         }
     ]
-    console.log(values.id);
     return (
 
     <div className="viewUser">

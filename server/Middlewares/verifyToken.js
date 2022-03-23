@@ -4,7 +4,7 @@ exports.verifyToken = (req, res, next)=>{
     const token = req.cookies.access_token;
 
     if(!token){
-        res.sendStatus(403);
+        res.sendStatus(403).send('Forbidden');
     }
 
     //verifyToken

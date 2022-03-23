@@ -1,5 +1,6 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React, { Children , useContext, useState} from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Dashboard from './components/Dashboard/Dashboard';
 import AdminLogin from './components/Log In pages/AdminLogin';
 import DoctorLogin from './components/Log In pages/DoctorLogin';
@@ -13,36 +14,50 @@ import ViewPatient from './components/AdminRoutes/ViewUsers/ViewPatients';
 import CreateEmployee from './pages/createEmployee';
 import CreatePatient from './pages/createPatient';
 import UpdateDoc from './pages/updateDoc';
+import { useAuth } from './components/context/LoginContext';
 
+
+export const authContext = React.createContext();
 
 function App() {
+const [isAuth, setIsAuth] = useState(false);
+
+
+
+  const RequireAuth = ({ children }) => {
+    console.log(isAuth)
+    return isAuth ? children: <Navigate to='/' replace />
+  }
+
   return (
     <div>
-      <BrowserRouter>
+      <authContext.Provider value = {[isAuth, setIsAuth]}>
+        <BrowserRouter>
 
-        <Routes>
-          <Route path='/doctorslogin' element={<DoctorLogin />} />
-          <Route path='/stafflogin' element={<StaffLogin />} />
-          <Route path='/adminlogin' element={<AdminLogin />} />
-          <Route path='/admin-dashboard' element={<Dashboard />}>
-            <Route index element={<Content />} />
-            <Route path='doctors'>
-              <Route path='' element={<ViewDoctors />} index />
-              
+          <Routes>
+            <Route path="/" exact element={<LandingPage />} />
+            <Route path='/doctorslogin' element={<DoctorLogin />} />
+            <Route path='/stafflogin' element={<StaffLogin />} />
+            <Route path='/adminlogin' element={<AdminLogin />} />
+            <Route path='/admin-dashboard' element={<RequireAuth><Dashboard /></RequireAuth>}>
+              <Route index element={<RequireAuth><Content /></RequireAuth>} />
+              <Route path='doctors'>
+                <Route path='' element={<RequireAuth><ViewDoctors /></RequireAuth>} index />
+
+              </Route>
+              <Route path='employees' element={<RequireAuth><ViewEmployees /></RequireAuth>} />
+              <Route path='patients' element={<RequireAuth><ViewPatient /></RequireAuth>} />
             </Route>
-            <Route path='employees' element={<ViewEmployees />} />
-            <Route path='patients' element={<ViewPatient />} />
-          </Route>
-          <Route path="updateDoc" element={<UpdateDoc />} />
-          <Route path="/" exact element={<LandingPage />} />
-          <Route path="/create-doctor" element={<CreateDoc />} />
-          <Route path="/create-Employee" element={<CreateEmployee />} />
-          <Route path="/create-Patient" element={<CreatePatient />} />
+            <Route path="updateDoc" element={<RequireAuth><UpdateDoc /></RequireAuth>} />
+            <Route path="/create-doctor" element={<RequireAuth><CreateDoc /></RequireAuth>} />
+            <Route path="/create-Employee" element={<RequireAuth><CreateEmployee /></RequireAuth>} />
+            <Route path="/create-Patient" element={<RequireAuth><CreatePatient /></RequireAuth>} />
+          </Routes>
+
+        </BrowserRouter>
+      </authContext.Provider>
 
 
-        </Routes>
-
-      </BrowserRouter>
     </div>
   );
 }

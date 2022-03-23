@@ -55,11 +55,14 @@ exports.loginUsers = async (req, res) => {
                 message: 'Check Login credentials'
             })
         } else {
+            const role = user.idRoles
+            console.log(role);
             const token = jwt.sign({ email: email }, 'secretKeyGoesHere')
-            res.cookie('access_token', token, user.idRoles);
-            res.json({
+            res.cookie('access_token', token);
+             res.json({
                 message: "Login successful",
-                token, 
+                role,
+                token
             });
             
         }
@@ -86,6 +89,16 @@ exports.getUsers = async (req, res) => {
 
 
 
-
-
+//Controller to get the Current users
+// exports.currentUser = async (req,res) =>{
+//     console.log('Use effect hitting the currentUser endpoint')
+//    const token = req.cookies.access_token
+//     try {
+//         if (!token) res.status(403).json({
+//             message: 'Forbidden'
+//         })  
+//     } catch (error) {
+//         if(error) console.log('Error occurred in the Current User controller' . error)
+//     }
+// }
 

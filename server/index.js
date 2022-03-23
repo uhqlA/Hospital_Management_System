@@ -1,6 +1,5 @@
 const cookieParser = require('cookie-parser');
 const express = require ('express');
-const db = require('./config/db');
 const router = require('./Routes/routes');
 const cors = require('cors')
 const app = express();
@@ -11,7 +10,6 @@ const morgan = require('morgan');
 //     origin: true,
 //     Credentials: true,
 // };
-
 
 app.use(morgan("dev"));
 app.use(express.json());
