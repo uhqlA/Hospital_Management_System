@@ -25,7 +25,7 @@ exports.getDoctors = async (req, res)=>{
 
  //update Doctors data
  exports.updateDoctors = async (req, res)=>{
-        const {id} = req.params.id;
+        const {id} = req.body;
        try {
         const outcome = await Doctor.update(req.body, {where:{id:id}})
         if (outcome == 1){
@@ -37,7 +37,7 @@ exports.getDoctors = async (req, res)=>{
         }
            
        } catch (error) {
-           res.send('An error occured while updating records' . error)
+           res.send('An error occured while updating records', error)
        }
     }
 

@@ -44,7 +44,7 @@ exports.updateEmployees = async (req, res)=>{
 
 //delete Employees
 exports.deleteEmployee = async (req, res)=>{
-    const{id} = req.body;
+    const id = req.params.id;
 
     try {
         const outcome = await Employee.destroy({where:{id:id}})

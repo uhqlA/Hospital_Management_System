@@ -3,11 +3,11 @@ import './dashboard.css'
 import  {Link} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-//import {useAuth} from '../../context/LoginContext'
+import useAuth from '../../context/LoginContext'
 function Sidebar() {
 
     const navigate = useNavigate();
-   // const {logout} = useAuth();
+    const {logout} = useAuth();
    
         const navToggle = () => {
             let sidebar = document.querySelector(".sidebar");
@@ -23,13 +23,16 @@ function Sidebar() {
 
         const handleLogout = (e)=>{
             e.preventDefault();
-    
-            axios.post('/logout')
-           // logout () 
+            try {
+                axios.post('/logout')
+                logout().then(()=>{
+                    navigate("/adminlogin")
+                })
+                                  
+            } catch (error) {
+                
+            }
 
-         // after handling Logout functionality
-    
-         navigate("/")
         }
 
     return (

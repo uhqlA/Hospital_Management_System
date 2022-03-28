@@ -6,32 +6,48 @@ import axios from "axios";
 
 
 
-export default function ViewEmployees() {
-    const [ values, setValues ] = useState("")
 
-    const loadEmployees =  () => {
+export default function ViewEmployees() {
+    const [values, setValues] = useState("")
+
+    const loadEmployees = () => {
         try {
             axios.get("/getEmployees").then(
                 (res) => {
                     setValues(res.data)
                 }
             )
-        
-            
+
+
         } catch (error) {
             if (error) console.log('Error fetching data'.error)
         }
 
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         loadEmployees()
     }, [])
+
+    //delete entry
+    const deletStaff = (id) => {
+        try {
+
+            axios.post(`http://localhost:8000/deleteEmployee/${id}`).then(
+                (res) => {
+                    console.log(res.data)
+                }
+            )
+        } catch (error) {
+            if (error) console.log('An error occured while deleting'.error)
+        }
+    }
+
 
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 90 },
-       
+
         {
             field: 'firstName', headerName: 'First Name', width: 200, renderCell: (params) => {
                 return (
@@ -52,7 +68,7 @@ export default function ViewEmployees() {
                         <Link to='#'>
                             <button className="editBtnDr">Edit</button>
                         </Link>
-                        <button className="dltBtn">Delete</button>
+                        <button className="dltBtn" onClick={()=>deletStaff(params.id)}>Delete</button>
                     </>
                 )
             }
@@ -61,16 +77,16 @@ export default function ViewEmployees() {
 
     return (
 
-    <div className="viewUser">
- 
+        <div className="viewUser">
+
             <div className="home-section">
-            <DataGrid
-                rows={values}
-                disableSelectionOnClick
-                columns={columns}
-            />
+                <DataGrid
+                    rows={values}
+                    disableSelectionOnClick
+                    columns={columns}
+                />
+            </div>
         </div>
-    </div>
 
 
     )

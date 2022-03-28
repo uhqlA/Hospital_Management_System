@@ -8,7 +8,7 @@ function LandingPage() {
         <>
         <Navbar/>
         <div classNameName="container">
-            Landing page coming soon.
+          <h1>  Landing page coming soon.</h1>
         </div >
 
 

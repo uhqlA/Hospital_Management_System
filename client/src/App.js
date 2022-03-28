@@ -1,5 +1,5 @@
 import './App.css';
-import React, { Children , useContext, useState} from 'react';
+import React, { Children , useEffect, useState} from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Dashboard from './components/Dashboard/Dashboard';
 import AdminLogin from './components/Log In pages/AdminLogin';
@@ -22,11 +22,16 @@ export const authContext = React.createContext();
 function App() {
 const [isAuth, setIsAuth] = useState(false);
 
+const [state, setstate] = useState('');
 
+
+    localStorage.setItem("isAuth", JSON.stringify(isAuth));
+
+    const saved = localStorage.getItem("isAuth");
 
   const RequireAuth = ({ children }) => {
-    console.log(isAuth)
-    return isAuth ? children: <Navigate to='/' replace />
+    console.log(saved)
+    return saved ? children: <Navigate to='/adminlogin' replace/>
   }
 
   return (
